@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+	<a href="/flights/new">New Flight</a>
+	<a href="/flights">All Flights</a>
+	<br>
+	<br>
+	<main>
+		<section id="show-page">
+			<div>Airline: </div>
+			<div>
+				<%= flight.airline %> <!--flight variable is defined in the appropriate render statement -->
+			</div>
+			<div>Airport: </div>
+			<div>
+				<%= flight.airport %>
+			</div>
+			<div>Flight Number: </div>
+			<div>
+				<%= flight.flightNo %>
+			</div>
+			<div>Departs: </div>
+			<div>
+				<%= flight.departs %>
+			</div>
+		</section>
+		<br><br>
+		<h2>Destinations</h2>
+		<form id="add-review-form" method="POST" action="/flights/<%= flight._id %>/destinations">
+			<label>Arrival Airport:</label>
+			<select name="airport">
+				<option value="ATL">ATL</option>
+				<option value="AUS">AUS</option>
+				<option value="DEN" selected>DEN</option>
+				<option value="DFW">DFW</option>
+				<option value="LAX">LAX</option>
+				<option value="SAN">SAN</option>
+			</select>
+			<!-- <textarea name="airport"></textarea> -->
+			<label>Arrival Date:</label>
+			<input type="datetime-local" name="arrival" value="<%= defaultDate %>">
+			<input type="submit" value="Add Flight">
+		</form>
+		<br><br>
+		<% if (flight.destinations.length) { %>
+			<table>
+				<thead>
+					<tr>
+						<th>Arrival</th>
+						<th>Airport</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% flight.destinations.forEach(function(f) { %>
+						<tr>
+							<td>
+								<%= f.arrival.toLocaleDateString() + " " + f.arrival.toLocaleTimeString() %>
+							</td>
+							<td>
+								<%= f.airport %>
+							</td>
+						</tr>
+						<% }); %>
+				</tbody>
+			</table>
+			<% } else { %>
+				<h5>No Segments Yet</h5>
+				<% } %>
+	</main>
+</body>
+
+</html>
