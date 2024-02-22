@@ -8,7 +8,6 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var flightRouter = require('./routes/flights');
 var destinationsRouter = require('./routes/destinations');
-var ticketsRouter = require('./routes/tickets')
 
 var app = express();
 
